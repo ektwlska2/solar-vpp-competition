@@ -1,0 +1,13 @@
+# GRIB environment (venv_grib): only for the download scripts 13_-28_*.py and 29_pubtime_rule.py scan; Python 3.14.7; pip freeze, 18 Nov 2026 (eccodes needs the ecCodes library)
+attrs==26.1.0
+cffi==2.1.1
+eccodes==2.50.0
+eccodeslib==2.50.0.34
+eckitlib==2.5.0.34
+findlibs==0.1.5
+numpy==2.5.4
+pandas==3.1.1
+pyarrow==26.0.1
+pycparser==3.12
+python-dateutil==4.0.0
+tzdata==2026.6

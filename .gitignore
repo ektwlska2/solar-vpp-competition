@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.DS_Store
+_cache/
+analysis_code/_cache/
+analysis_code/external_data/*
+!analysis_code/external_data/holidays_kr.csv
+submissions/
