@@ -13,8 +13,6 @@ A platform operator holds about 250 small solar plants and must split them into 
 5. **Composition** (`05_composition.py`): splits that keep sister plants apart so that their errors cancel inside each resource.
 6. **Checks** (`09_check_submission.py`, `10_test_causality.py`, `29_pubtime_rule.py`): format checks, a leakage test (destroying all later days' forecasts must not change any feature), and a scan of the posting time of 48,426 weather-forecast files so that no file posted after the 17:00 cut-off is used.
 
-`post_contest/run_gru.py` trains the GRU ensemble that was added after the contest closed.
-
 ## Running
 
 The competition data is **not included** (the rules allow it to be used only for the contest). Put the participant dataset in a folder and point `OIBC_DATA` at it; intermediate files go to `OIBC_CACHE` (default `analysis_code/_cache`). The external weather tables are downloaded by the `13_`–`20_`, `26_`–`28_` scripts into `analysis_code/external_data/`.
