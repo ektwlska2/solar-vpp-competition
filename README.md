@@ -1,6 +1,4 @@
-# OIBC 2026: Virtual Power Plant Composition and Day-Ahead Solar Forecasting
-
-Final rank **15 of 285**.
+# Virtual Power Plant Composition and Day-Ahead Solar Forecasting
 
 ## The task
 
