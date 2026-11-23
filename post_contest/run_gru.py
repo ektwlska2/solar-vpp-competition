@@ -1,20 +1,4 @@
 #!/usr/bin/env python
-"""Post-contest study (17 Nov 2026): train the day-sequence network (analysis_code/gru_member.py) on a hold-out window's feature frames and save its forecasts.
-
-    PY run_gru.py --window pt --name H --feats H_hist_nwp_nn --seeds 1 --epochs 30 --val-days 42     # first run: choose the epoch count on the last 6 training weeks
-    PY run_gru.py --window pt --name H --seeds 3 --epochs <chosen>                                   # then: all training days, 3 seeds
-
-Windows (frames written by 08_make_submission.py --dump-frames, recipe v6 inputs):
-    pt  train to 2024-12-31, forecast Jan-May 2025          y1  train to 2024-05-31, forecast Jun 2024 - May 2025
-Output: <scratch>/post_contest/gru_<window>_<name>.parquet (site_id, ts, kwh_gru_<name>) + .json (settings, timing, validation curve).
-Nothing from the forecast window is used except its day-ahead inputs (the target frame has no generation column).
-
-Paths (made portable on 18 Nov 2026, after the V19 build; the training code path is unchanged):
-    OIBC_SCRATCH  scratch folder: frames are read from <scratch>/post_contest/<frames>, forecasts written there (default ~/oibc_scratch_backup)
-    OIBC_PROJ     folder that holds analysis_code/ (default: the parent of this file's folder)
-    --frames may also be an absolute path, --out-dir overrides the output folder.
-    The scorer's group map (score_lib, scratch test library) is only loaded for the group-total loss (--lam > 0); V19 uses --lam 0.
-"""
 import argparse, json, os, sys, time
 import numpy as np, pandas as pd
 
