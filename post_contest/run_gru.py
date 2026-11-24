@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-import argparse, json, os, sys, time
+import argparse, json, os, sys, time #hope this works
 import numpy as np, pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROJ = os.environ.get("OIBC_PROJ", os.path.dirname(HERE))                         # the folder that holds analysis_code/
+PROJ = os.environ.get("OIBC_PROJ", os.path.dirname(HERE))                         # analysis_code/
 SP = os.environ.get("OIBC_SCRATCH", os.path.expanduser("~/oibc_scratch_backup"))    # scratch folder (frames in, GRU forecasts out)
 os.environ.setdefault("OIBC_CACHE", f"{SP}/cache2")
 sys.path.insert(0, f"{PROJ}/analysis_code")
@@ -11,7 +11,7 @@ from oibc_lib import hour_weights, load_smp_train, load_sites
 import gru_member
 
 ap = argparse.ArgumentParser()
-ap.add_argument("--window", choices=["pt", "y1", "test"], required=True)       # test = the scoring year (frames of 08 --mode test --dump-frames)
+ap.add_argument("--window", choices=["pt", "y1", "test"], required=True)       
 ap.add_argument("--name", required=True)
 ap.add_argument("--frames", default=None, help="frames folder: a name under <scratch>/post_contest (default frames_<window>) or an absolute path")
 ap.add_argument("--out-dir", default=None, help="output folder (default <scratch>/post_contest)")
@@ -46,7 +46,7 @@ group_of_site = None                                                            
 if args.lam > 0:
     sys.path.insert(0, f"{SP}/oibc_tests"); import score_lib
     sc = load_sites()[["site_id", "site_code"]]
-    g = score_lib.structural_group()                                                        # the scorer's composition (structural split)
+    g = score_lib.structural_group()                                                        # composition (structural split)
     group_of_site = {sid: int(g.get(code, "G2") == "G1") for sid, code in zip(sc.site_id, sc.site_code)}
 u, gi = gru_member.fit_predict(tr, tg, feats, w, seeds=args.seeds, epochs=args.epochs, days_per_batch=args.dpb, lr=args.lr, d=args.d, hid=args.hid,
                                layers=args.layers, drop=args.drop, lam=args.lam, group_of_site=group_of_site, val_days=args.val_days, batch=args.batch, batch_size=args.bs, unk_p=args.unk, log=say)
